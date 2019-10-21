@@ -4,6 +4,7 @@ namespace App\Factory;
 
 use App\Entity\Image;
 use App\Exception\InvalidImageAssociativeArrayException;
+use App\Exception\InvalidImageObjectException;
 
 class ImageFactory
 {
@@ -28,6 +29,30 @@ class ImageFactory
             $imageArray['name'],
             $imageArray['image'],
             (float)$imageArray['discount_percentage'],
+        );
+    }
+
+    /**
+     * @param object $object
+     * @return Image
+     * @throws InvalidImageObjectException
+     */
+    public static function createImageFromObject(object $object): Image
+    {
+        if (
+            !isset($object->id) ||
+            !isset($object->name) ||
+            !isset($object->image_url) ||
+            !isset($object->discount_percentage)
+        ) {
+            throw new InvalidImageObjectException('Invalid object');
+        }
+
+        return self::createImage(
+            $object->id,
+            $object->name,
+            $object->image_url,
+            (float)$object->discount_percentage,
         );
     }
 

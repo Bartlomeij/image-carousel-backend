@@ -25,7 +25,7 @@ class ImagesListXmlFile extends AbstractImagesListFile
      */
     protected function arrayToXml($array, SimpleXMLElement &$xml): void
     {
-        foreach ($array as $key => $value) {
+            foreach ($array as $key => $value) {
             if ($value instanceof Image) {
                 $subnode = $xml->addChild("image$key");
                 $subnode->addChild('id', $value->getId());

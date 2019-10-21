@@ -18,6 +18,9 @@ class FileFactory
     public const JSON_FILE_TYPE = 'json';
     public const XML_FILE_TYPE = 'xml';
 
+    public const DEFAULT_JSON_FILE_PATH = '/var/files/images.json';
+    public const DEFAULT_XML_FILE_PATH = '/var/files/images.xml';
+
     /**
      * @param string $filepath
      * @return array
@@ -36,6 +39,38 @@ class FileFactory
         });
         array_shift($csv);
         return $csv;
+    }
+
+    /**
+     * @param string $filepath
+     * @return array
+     * @throws FileDoesNotExistException
+     */
+    public static function createObjectsArrayFromJsonFile(string $filepath): array
+    {
+        if (!file_exists($filepath)) {
+            throw new FileDoesNotExistException(sprintf("File %s does not exist", $filepath));
+        }
+
+        return array_map('json_decode', file($filepath))[0];
+    }
+
+    /**
+     * @param string $filepath
+     * @return array
+     * @throws FileDoesNotExistException
+     */
+    public static function createObjectsArrayFromXmlFile(string $filepath): array
+    {
+        if (!file_exists($filepath)) {
+            throw new FileDoesNotExistException(sprintf("File %s does not exist", $filepath));
+        }
+
+        $objectsArray = [];
+        foreach (simplexml_load_string(file_get_contents($filepath)) as $row) {
+            $objectsArray[] = $row;
+        }
+        return $objectsArray;
     }
 
     /**

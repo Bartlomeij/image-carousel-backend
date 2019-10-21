@@ -85,8 +85,8 @@ class Image implements JsonSerializable
         return [
             'id'   => $this->getId(),
             'name' => $this->getName(),
-            'imageUrl' => $this->getImageUrl(),
-            'getDiscountPercentage' => $this->getDiscountPercentage(),
+            'image_url' => $this->getImageUrl(),
+            'discount_percentage' => $this->getDiscountPercentage(),
         ];
     }
 }
