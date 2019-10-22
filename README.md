@@ -1,8 +1,7 @@
 Image Carousel Backend
 ============
 
-That's not the simplest solution. I know. It’s maybe over engineered in this case but I wanted to show how do I work with code in more advanced architecture.
-It took me about 2-3 hours to create a backend service. You can get Json or Xml response.
+That's not the simplest solution. I know. It’s maybe over engineered in this case but I wanted to show how do I work with code in more advanced architecture. You can get Json or Xml response.
 
 ### Example CSV file (comma-separated):
 ```
